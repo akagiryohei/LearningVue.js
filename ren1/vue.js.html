@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mt first Vue app</title>
+        <!-- Vue.js3のロード -->
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+
+    <body>
+        <h1>Vue3</h1>
+        <div id ="app">
+            {{ message }}
+        </div>
+
+        <script>
+            const appdata ={
+                data(){
+                    return {
+                        message: 'Hello Vue'
+                    }
+                }
+            }
+            Vue.createApp(appdata).mount('#app')
+
+        </script>
+
+
+
+
+    </body>
+</html>

@@ -10,3 +10,5 @@ npm ERR! A complete log of this run can be found in:
 npm ERR!     C:\Users\abbbb\AppData\Local\npm-cache\_logs\2023-08-30T22_45_51_247Z-debug-0.log 
 
 npm ERR! code ENOLOCK
+
+npm install -g @vue/cli

@@ -8,22 +8,30 @@
     </head>
 
     <body>
+        <!-- 表示のためのタグ -->
         <h1>Vue3</h1>
         <div id ="app">
             {{ message }}
         </div>
 
-        <script>
-            const appdata ={
-                data(){
-                    return {
-                        message: 'Hello Vue'
-                    }
+    <!-- Vue3のスクリプト -->
+    <script>
+        const appdata ={
+            data(){
+                return {
+                    message: 'Hello Vue',
+                    count: 0
                 }
+            },
+            mounted(){
+                setInterval(() => {
+                    this.count++
+                    this.message = 'Count: ' + this.count
+                },1000)
             }
-            Vue.createApp(appdata).mount('#app')
-
-        </script>
+        }
+        Vue.createApp(appdata).mount('#app')
+    </script>
 
 
 

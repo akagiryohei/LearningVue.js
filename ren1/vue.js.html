@@ -11,40 +11,27 @@
         <!-- 表示のためのタグ -->
         <h1>Vue3</h1>
         <div id ="app">
-            <!-- <p>{{ message.toUpperCase() }}</p> toUpperCaseは大文字表記 -->
-            <p>{{ message + "[" + new Date().toLocaleString() + "]" }}</p> <!--new Dateなどで現在日時取得-->
-            <hr>
-            <button onclick="doAction()">stop</button>
+            <div v-html="message"></div>
         </div>
 
     <!-- Vue3のスクリプト -->
     <script>
-        let timer =null
-        function doAction(){
-            clearInterval(timer)
-        }
+        const list = ['One','Two','Three']
+
         const appdata ={
             data(){
                 return {
-                    message:''
+                    message: `<ul>
+                        <li>${list[0]}</li>
+                        <li>${list[1]}</li>
+                        <li>${list[2]}</li>
+                        </ul>`
                 }
-            },
-            created(){
-                    this.message = 'Hello Vue',
-                    this.count = 0
-            },
-            mounted(){
-                timer =setInterval(() => {
-                    this.count++
-                    this.message = 'Count: ' + this.count // Countのところは文字列、値には関係しない
-                },1000)
             }
         }
-        Vue.createApp(appdata).mount('#app')
+        let app = Vue.createApp(appdata)
+        app.mount('#app')
     </script>
-
-
-
 
     </body>
 </html>

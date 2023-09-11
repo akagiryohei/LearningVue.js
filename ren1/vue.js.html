@@ -11,21 +11,16 @@
         <!-- 表示のためのタグ -->
         <h1>Vue3</h1>
         <div id ="app">
-            <div v-html="message"></div>
+            <div>{{ num + 'は、' + (num % 2 == 0 ? '偶数' : '奇数') + 'です。'}}</div>
         </div>
 
     <!-- Vue3のスクリプト -->
     <script>
-        const list = ['One','Two','Three']
-
         const appdata ={
             data(){
                 return {
-                    message: `<ul>
-                        <li>${list[0]}</li>
-                        <li>${list[1]}</li>
-                        <li>${list[2]}</li>
-                        </ul>`
+                    num: Math.floor(Math.random() * 100)
+                
                 }
             }
         }

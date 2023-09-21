@@ -14,23 +14,26 @@
 
     <body>
         <!-- 表示のためのタグ -->
-        <h1>Vue3</h1>
-        <div id ="app">
-            <!-- それぞれ順番はvalueとkeyであるが、これはおそらく変数のように
-            使用時の名前を決めてるものと予測できる -->
-            <pre>{{ data.map((value,key)=>key +' ：「' + value + '」').join('\n') }}</pre>
-            <!-- .joinで文字を改行しながら１つのテキストにしている -->
+        <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
+        <div id ="app" class="container">
+            <p>※Card</p>
+            <div class ="card m-4 p-4" style="width:18rem;">
+                <h5 class ="card-title">Contents</h5>
+                <p class="card-text">{{ message }}</p>
+            </div>
         </div>
 
     <!-- Vue3のスクリプト -->
     <script>
-        const data = ['Windows','macOS','Linux','iOS','Android']
         const appdata ={
             data(){
                 return {
-                    data:data
+                    message : null
                 
                 }
+            },
+            mounted(){
+                this.message = 'This is sample page.'
             }
         }
         let app = Vue.createApp(appdata)

@@ -13,40 +13,43 @@
     </head>
 
     <body>
-        <!-- 表示のためのタグ -->
+        <style>
+            .red{
+                font-size:32pt;
+                font-weight:plain;
+                font-style:normal;
+                color:red;
+            }
+            .blue{
+                font-size:24pt;
+                font-weight: bold;
+                font-style: italic;
+                color:blue;
+            }
+        </style>
+
         <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
         <div id="app" class="container">
-            <p>※フォームの表示数。</p>
-            <form>
-                <div class="form-group">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" placeholder="IDを入力">
-                    <small class="form-text">あなたのIDを入力してください。</small>
-                </div>
-                <div class="form-group">
-                    <label for="pass">Password</label>
-                    <input type="password" class="form-control" id="pass" placeholder="パスワード">
-                    <small class="form-text">パスワードを入力してください。</small>
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="check">
-                    <label class="form-check-label" for="check">Check box</label>
-                </div>
-                <button type="submit" class="btn btn-primary">送信</button>
-            </from>
+            <p :class="{red:isRed, blue:isBlue}">
+                {{ message}}
+            </p>
         </div>
 
-    <!-- Vue3のスクリプト -->
     <script>
         const appdata ={
             data(){
                 return {
-                    message : null
-                
+                    message : null,
+                    isRed: true,
+                    isBlue: false
                 }
             },
             mounted(){
                 this.message = 'This is sample page.'
+                setInterval(()=>{
+                    this.isBlue = !this.isBlue
+                    this.isRed = !this.isRed
+                },1000)
             }
         }
         let app = Vue.createApp(appdata)

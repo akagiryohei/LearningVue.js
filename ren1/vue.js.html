@@ -18,7 +18,8 @@
             <templete v-if="flag">
                 <p>※データをテーブル表示する</p>
                 <table class="table">
-                    <thead class="thead-dark">
+                    <!-- 使用しているbootstrapのヴァージョンが違うためthead-dark廃止されている。 -->
+                    <thead class="table-dark">
                         <tr><th>Name</th><th>mail</th></tr>
                     </thead>
                     <tbody>

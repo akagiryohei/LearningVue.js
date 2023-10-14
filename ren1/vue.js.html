@@ -19,16 +19,30 @@
             <table class="table">
                 <thead class="table-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>mail</th>
                         <th>tel</th>
                     </tr>
                 </thead>
-                <tr v-for="(item,key) in items">
-                    <td>{{ key }}</td>
-                    <td>{{ item.mail }}</td>
-                    <td>{{ item.tel }}</td>
-                </tr>
+                <template v-for="(item, index) in items">
+                    <template v-if="index % 2 == 0">
+                        <tr>
+                            <td>{{ index }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.mail }}</td>
+                            <td>{{ item.tel }}</td>
+                        </tr>
+                    </template>
+                    <template v-else>
+                        <tr>
+                            <td>***</td>
+                            <td>***非公開***</td>
+                            <td>***非公開***</td>
+                            <td>***非公開***</td>
+                        </tr>
+                    </template>
+                </template>
             </table>
         </div>
 
@@ -37,12 +51,14 @@
             data(){
                 return {
                     message : '※データをテーブル表示する',
-                    items:{
-                        Taro:{mail:'taro@yamada', tel:'999-999'},
-                        Hanako:{mail:'hanako@flower', tel:'888-888'},
-                        Sachiko:{mail:'hanako@flower', tel:'888-888'},
-                        Jiro:{mail:'jiro@change',tel:'666-666'}
-                    }
+                    items:[
+                        {name:'Taro', mail:'taro@yamada', tel:'999-999'},
+                        {name:'Hanako', mail:'hanako@flower', tel:'888-888'},
+                        {name:'Sachiko', mail:'sachiko@happy', tel:'777-777'},
+                        {name:'Jiro', mail:'jiro@change', tel:'666-666'},
+                        {name:'mami',mail:'mami@mumemo', tel:'555-555'},
+                    ]
+                    
                 }
             }
         }

@@ -16,8 +16,8 @@
         <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
         <div id="app" class="container">
             <p>{{ message }}</p>
-            <!--ここでhelloコンポーネントを使用してる-->
-            <hello/>
+            <div><hello name="Taro" /></div>
+            <div><hello name="Hanako" /></div>
         </div>
 
     <script>
@@ -31,7 +31,11 @@
         let app = Vue.createApp(appdata)
         // 先にapp = Vue.createApp({})をしておかないとcomponetメソッドは使用できない
         // アプリケーション・オブジェクトというもの
-        app.component('hello', { 
+        app.component('hello', {
+            // propsは配列を値に持つプロパティです。タグの属性の名前尾をまとめる
+            // こうするとそれらの名前をタグの属性として記述できるようになる
+            // そのままtemplate内で使用できる
+            props:['name'],
             data(){
                 return{
                     message : 'これは新しいメッセージです。'
@@ -39,7 +43,7 @@
             },
             // templateに設定した内容がコンポーネントとして表示される
             // <p>タグを使用してHelloという表示を作ってそれがそのまま置き換わっている
-            template: '<p class="alert alert-primary">{{ message }}</p>'
+            template: '<p class="alert alert-primary">Hello, {{ name }}</p>'
         })
         app.mount('#app')
     </script>

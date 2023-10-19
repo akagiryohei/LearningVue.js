@@ -16,15 +16,15 @@
         <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
         <div id="app" class="container">
             <p>{{ message }}</p>
-            <div><hello name="Taro" /></div>
-            <div><hello name="Hanako" /></div>
+            <hello v-for="item in data" v-bind:name="item" />
         </div>
 
     <script>
         const appdata ={
             data(){
                 return {
-                    message : '※コンポーネントを表示する'
+                    message : '※コンポーネントを表示する',
+                    data:['Taro', 'Hanaka', 'Sachiko', 'Jiro']
                 }
             }
         }
@@ -35,7 +35,7 @@
             // propsは配列を値に持つプロパティです。タグの属性の名前尾をまとめる
             // こうするとそれらの名前をタグの属性として記述できるようになる
             // そのままtemplate内で使用できる
-            props:['name'],
+            props:{name:String},
             data(){
                 return{
                     message : 'これは新しいメッセージです。'

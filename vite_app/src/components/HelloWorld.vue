@@ -1,18 +1,31 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <button @click="count++">count is: {{ count }}</button>
-  <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
+  <div class="alert alert-info">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+    <hr>
+    <div>
+      <input class="form-control" type="text" v-model="input">
+      <button class="btn btn-info mt-2" v-on:click="doAction">Click</button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    title:String,
+    message:String,
   },
-  data() {
+  data(){
     return {
-      count: 0
+      message:'お名前は？',
+      input:'no name',
+    }
+  },
+  methods:{
+    doAction(){
+      this.message='こんにちは、'+this.input + 'さん！'
     }
   }
 }

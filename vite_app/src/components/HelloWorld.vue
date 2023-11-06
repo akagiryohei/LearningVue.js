@@ -1,31 +1,31 @@
 <template>
-  <div class="alert alert-info">
+  <div className="alert alert-primary">
     <h2>{{ title }}</h2>
-    <p>{{ message }}</p>
-    <hr>
-    <div>
-      <input class="form-control" type="text" v-model="input">
-      <button class="btn btn-info mt-2" v-on:click="doAction">Click</button>
-    </div>
+    <p ref="msg">{{ message }}</p>
+    <button class="btn btn-primary" v-on:click="DoAction">Click</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    title:String,
-  },
   data(){
     return {
-      message:'お名前は？',
-      input:'no name',
+      title:'HelloWorld',
+      message:'This is sample massage.',
     }
   },
+  mounted(){
+    this.counter = 0
+  },
   methods:{
-    doAction(){
-      this.message='こんにちは、'+this.input + 'さん！'
-      this.$emit('result-event', this.input) // result-eventという属性をここで作ってる？
+    DoAction(){
+      this.counter++
+      let element = this.$refs.msg.innerHTML
+      console.log(element)
+      // this.$refs.msg の中身：<p> This is sample massage. <h6>counted:1</h6> </p>
+      // this.$refs.msg.innerHTMLの中身：This is sample massage.
+      this.$refs.msg.innerHTML += '<h6>counted:'+ this.counter + '</h6>'
     }
   }
 }

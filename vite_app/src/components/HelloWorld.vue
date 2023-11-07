@@ -1,31 +1,29 @@
-<template>
-  <div className="alert alert-primary">
+<!-- <template>
+  <div class="alert alert-info">
     <h2>{{ title }}</h2>
-    <p ref="msg">{{ message }}</p>
-    <button class="btn btn-primary" v-on:click="DoAction">Click</button>
+    <p>{{ message }}</p>
   </div>
-</template>
+</template> -->
 
 <script>
-export default {
-  name: 'HelloWorld',
+import { h } from 'vue'
+export default{
+  name:'HelloWorld',
   data(){
-    return {
-      title:'HelloWorld',
-      message:'This is sample massage.',
+    return{
+      title: 'HelloWorld',
+      message:'This is sample message.'
     }
   },
-  mounted(){
-    this.counter = 0
-  },
-  methods:{
-    DoAction(){
-      this.counter++
-      let element = this.$refs.msg.innerHTML
-      // this.$refs.msg の中身：<p> This is sample massage. <h6>counted:1</h6> </p>
-      // this.$refs.msg.innerHTMLの中身：This is sample massage.
-      this.$refs.msg.innerHTML += '<h6>counted:'+ this.counter + '</h6>'
-    }
+  render(){
+    return h('div',{
+      class:'alert alert-warning'
+    },
+    [
+      h('h2', this.title),
+      h('p', this.message)
+    ])
   }
 }
+
 </script>

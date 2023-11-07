@@ -22,7 +22,6 @@ export default {
     DoAction(){
       this.counter++
       let element = this.$refs.msg.innerHTML
-      console.log(element)
       // this.$refs.msg の中身：<p> This is sample massage. <h6>counted:1</h6> </p>
       // this.$refs.msg.innerHTMLの中身：This is sample massage.
       this.$refs.msg.innerHTML += '<h6>counted:'+ this.counter + '</h6>'

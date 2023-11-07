@@ -1,17 +1,17 @@
 
 <template>
   <div id = "app">
-    <HelloWorld />
+    <helloJSX title="OK, Vue3" msg="※属性で設定したメッセージ。" />
   </div>
-</template>
+</template> 
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import helloJSX from './components/helloJSX.jsx';
 
 export default{
   name:'app',
   components:{
-    HelloWorld
+    helloJSX
   }
 }
 </script>

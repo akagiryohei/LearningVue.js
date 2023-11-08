@@ -1,7 +1,20 @@
 <template>
   <div id = "app">
-    <HelloWorld title="slot">
-      <p>***this is defalut text***</p>
+    <HelloWorld >
+      <p>Begin!...</p>
+      <template v-slot:first>
+        ***First message***
+      </template>
+
+      <p>..Middle..</p>
+      <template v-slot:second>
+        ***Second message***
+      </template>
+      
+      <p>..End</p>
+      <template v-slot:third>
+        ***Third message***
+      </template>
     </HelloWorld> 
   </div>
 </template> 

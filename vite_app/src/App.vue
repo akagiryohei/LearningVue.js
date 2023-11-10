@@ -1,14 +1,9 @@
+
 <template>
-  <div id = "app">
-    <HelloWorld title="slot">
-      <li class="list-group-item" 
-      v-for="obj in slotobjs"
-      v-bind:key="obj.name">
-      {{ obj.name }} ({{ obj.mail }})
-    </li>
-    </HelloWorld> 
+  <div id="app">
+    <HelloWorld title="Composition API" msg="This is Composition API sample." />
   </div>
-</template> 
+</template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
@@ -18,14 +13,5 @@ export default{
   components:{
     HelloWorld
   },
-  data(){
-    return {
-      slotobjs:[
-        {name:'Taro',mail:'taro@yamada'},
-        {name:'Hanako',mail:'hanako@flower'},
-        {name:'Sachiko',mail:'sachiko@happy'},
-      ]
-    }
-  }
 }
 </script>

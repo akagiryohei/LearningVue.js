@@ -1,34 +1,16 @@
-
 <template>
   <div id="app">
-    <div>
-       <!-- router.jsのpathのリンクがtoに入ってる -->
-      <router-link to="/index/taro" class="btn btn-primary mx-2">
-        Go to Top
-      </router-link>
-      <router-link to="/jsx/hanako" class="btn btn-warning">
-        Go to JSX
-      </router-link>
-    </div>
-    <hr>
-    <router-view></router-view>
+    <HelloWorld/>
   </div>
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld.vue'
+
 export default{
   name:'app',
-  created(){
-    console.log("***** App created! ******")
-
+  components:{
+    HelloWorld
   },
-  mounted(){
-    console.log("---- App Mounted! ------")
-  },
-  data(){
-    return{
-      title:'Router'
-    }
-  }
 }
 </script>

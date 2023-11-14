@@ -2,6 +2,9 @@ import { ref, reactive } from 'vue'
 
 export default {
   name: 'HelloJSX',
+    // ここでnameを宣言していないと18行目でnameを使えない
+    // App.vueのparamsのnameのパラメータをこちらで受け止めている形？
+
   props:{
     name: String
   },

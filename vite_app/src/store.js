@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import createPersistedState from "vuex-persistedstate"
 
 export const store = createStore({
   state: ()=> {
@@ -8,23 +9,18 @@ export const store = createStore({
       }
   },
   mutations: {
-    count: (state, n)=> {
-      state.counter += n
-    },
-    say: (state, msg)=> {
-      state.message =msg
+    doit: (state)=> {
+        var n = Math.floor(Math.random() * 10)
+        state.counter += n
+        state.message = 'add ' + n + '.';
     },
     reset: (state)=> {
-        state.counter = 0
-        state.message ='reset!!'
+        state.counter = 0;
+        state.message ='reset now'
     },
   },
-  actions: {
-    doit: (context)=> {
-      var n = Math.floor(Math.random() * 10)
-      context.commit('count', n)
-      
-      context.commit('say', 'add ' + n + '!')
-    },
-  }
+  // vuex-persistedstate使用：ローカルストレージに保存
+  plugins: [
+    createPersistedState(),
+  ],
 })

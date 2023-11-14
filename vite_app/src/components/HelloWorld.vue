@@ -3,10 +3,11 @@
     <h1>{{data.title}}</h1>
     <p class="mt-3 h5">{{$store.state.message}}</p>
     <hr>
-    <div class="alert alert-dark"
-      @click.exact="$store.commit('count',1)"
-      @click.shift="$store.commit('count',2)"
-      @click.ctrl="$store.commit('count',3)">
+    <!-- type:'count'これはstore.jsで定義したミューテーション名です。 -->
+    <div class="alert alert-secondary"
+      @click.exact="$store.commit({type:'count',message:'add 1!',add:1})"
+      @click.shift.exact="$store.commit({type:'count',message:'add 5!',add:5})"
+      @click.ctrl.exact="$store.commit({type:'count',message:'add 10!',add:10})">
       <a class="h5"
       @click.stop="$store.commit('reset')">
         clicked:{{ $store.state.counter }}

@@ -2,7 +2,11 @@
   <section class="alert alert-primary">
     <h1>{{ data.title }}</h1>
     <p>{{ data.message }}</p>
-    <table class="table-light table-striped">
+    <div class="form-group">
+      <input type="number" class="form-control" v-model="data.id" />
+      <button class="btn btn-primary m-2" @click="doClick">Click</button>
+    </div>
+    <table class="table table-light table-striped">
       <tbody class="text-left">
         <tr>
           <th style="width: 200px;">User ID</th>
@@ -10,15 +14,15 @@
         </tr>
         <tr>
           <th>ID</th>
-          <td>{{ data.json_data ? data.json_data.id :'-' }}</td>
+          <td>{{ data.json_data ? data.json_data.id : '-' }}</td>
         </tr>
         <tr>
           <th>Title</th>
-          <td>{{ data.json_data ? data.json_data.title :'-' }}</td>
+          <td>{{ data.json_data ? data.json_data.title : '-' }}</td>
         </tr>
         <tr>
           <th>Body</th>
-          <td>{{ data.json_data ? data.json_data.body :'-' }}</td>
+          <td>{{ data.json_data ? data.json_data.body : '-' }}</td>
         </tr>
       </tbody>
     </table>
@@ -27,7 +31,7 @@
 
 <script>
 import axios from 'axios'
-import { onMounted, reactive } from 'vue'
+import { reactive } from 'vue'
 
 let url = "https://jsonplaceholder.typicode.com/posts/"
 
@@ -36,24 +40,20 @@ export default {
     const data = reactive({
       title: 'Axios',
       message: 'This is axios sample.',
-      json_data:null,
+      id: 0,
+      json_data: null,
     })
-    const getData = () => {
-      let id = 2 // ★ID番号
+    const doClick = () => {
       // .get()：配列ならキーを入れるととれる。
       // axios.get()のときにpromiseオブジェクトを返す
       // .then():resultの中にdata.txtの中身が入ってる
       // idの指定をするときは(url + id)と記述すると該当するIDの物を取得できる。
-      axios.get(url + id).then((result) => {
-        console.log(result.data)
+      axios.get(url + data.id).then((result) => {
         data.json_data = result.data
       })
     }
-    // マウントしたときに該当のメソッドの呼び出し
-    onMounted(() => {
-      getData()
-    })
-    return { data, getData }
+    // マウント処理不要
+    return { data, doClick }
   },
 }
 </script>

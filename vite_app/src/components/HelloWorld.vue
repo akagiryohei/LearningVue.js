@@ -44,13 +44,15 @@ export default {
       json_data: null,
     })
     const doClick = () => {
-      // .get()：配列ならキーを入れるととれる。
-      // axios.get()のときにpromiseオブジェクトを返す
-      // .then():resultの中にdata.txtの中身が入ってる
-      // idの指定をするときは(url + id)と記述すると該当するIDの物を取得できる。
       axios.get(url + data.id).then((result) => {
         data.json_data = result.data
+      }).catch((error)=>{
+        data.message='ERROR!'
+        data.json_data = null
+        console.log(error)
       })
+      // catchの()の中身がどの変数でも同じようにエラーオブジェクトが入る
+      // catchStatements：例外発生時に実行される文      
     }
     // マウント処理不要
     return { data, doClick }

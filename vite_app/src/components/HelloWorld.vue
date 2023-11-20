@@ -2,27 +2,19 @@
   <section class="alert alert-primary">
     <h1>{{ data.title }}</h1>
     <p>{{ data.message }}</p>
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="data.id" />
-      <button class="btn btn-primary m-2" @click="doClick">Click</button>
-    </div>
     <table class="table table-light table-striped">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Mail</th>
+        </tr>
+      </thead>
       <tbody class="text-left">
-        <tr>
-          <th style="width: 200px;">User ID</th>
-          <td>{{ data.json_data ? data.json_data.userId : '-' }}</td>
-        </tr>
-        <tr>
-          <th>ID</th>
-          <td>{{ data.json_data ? data.json_data.id : '-' }}</td>
-        </tr>
-        <tr>
-          <th>Title</th>
-          <td>{{ data.json_data ? data.json_data.title : '-' }}</td>
-        </tr>
-        <tr>
-          <th>Body</th>
-          <td>{{ data.json_data ? data.json_data.body : '-' }}</td>
+        <tr v-for="(item, key) in data.fire_data">
+          <td>{{ item.name }}</td>
+          <td>{{ item.age }}</td>
+          <td>{{ key }}</td>
         </tr>
       </tbody>
     </table>
@@ -31,31 +23,28 @@
 
 <script>
 import axios from 'axios'
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 
-let url = "https://jsonplaceholder.typicode.com/posts/"
+// let url = "https://jsonplaceholder.typicode.com/posts/"
+let url = "https://akigi-vue3-default-rtdb.firebaseio.com/person.json"
 
 export default {
   setup(props) {
     const data = reactive({
-      title: 'Axios',
-      message: 'This is axios sample.',
-      id: 0,
-      json_data: null,
+      title: 'Firebase',
+      message: 'This is Firebase sample.',
+      fire_data: null,
     })
-    const doClick = () => {
-      axios.get(url + data.id).then((result) => {
-        data.json_data = result.data
-      }).catch((error)=>{
-        data.message='ERROR!'
-        data.json_data = null
-        console.log(error)
+    const getData = () => {
+      axios.get(url).then((result) => {
+        data.fire_data = result.data
+        console.log(data.fire_data)
       })
-      // catchの()の中身がどの変数でも同じようにエラーオブジェクトが入る
-      // catchStatements：例外発生時に実行される文      
     }
-    // マウント処理不要
-    return { data, doClick }
+    onMounted(() => {
+      getData()
+    })
+    return { data }
   },
 }
 </script>

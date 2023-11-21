@@ -2,9 +2,25 @@
   <section class="alert alert-primary">
     <h1>{{ data.title }}</h1>
     <p>{{ data.message }}</p>
-    <div class="form-inline my-2">
-      <input type="text" v-model="data.find" class="form-control">
-      <button @click="getData" class="btn btn-primary">
+
+    <div class="text-left">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" v-model="data.email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" v-model="data.username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Age</label>
+        <input type="text" v-model="data.age" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Tel</label>
+        <input type="text" v-model="data.tel" class="form-control">
+      </div>
+      <button @click="addData" class="btn btn-primary my-3">
         Click</button>
     </div>
     <ul v-for="(item, key) in data.fire_data" class="list-group">
@@ -17,36 +33,56 @@
 
 <script>
 import axios from 'axios'
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 
-let url = "https://akigi-vue3-default-rtdb.firebaseio.com/person.json?orderBy=%22age%22" //☆
+let url = "https://akigi-vue3-default-rtdb.firebaseio.com/person" //☆
 
 export default {
   setup(props) {
     const data = reactive({
       title: 'Firebase',
       message: 'This is Firebase sample.',
-      find: '',
+      email: '',
+      username: '',
+      tel: '',
+      age: '',
       fire_data: {},
     })
+    const addData = () => {
+      if (data.username == '') {
+        console.log('no-username!')
+        return
+      }
+      // url作成
+      let add_url = url + '/' + data.email + '.json'
+      let item = {
+        'name': data.username,
+        'age': data.age,
+        'tel': data.tel
+      }
+      // アクセスしてdatabaseに情報追加して、箱を空にしてからgetDataで情報取得
+      axios.put(add_url, item).then((re) => {
+        data.email = ''
+        data.username = ''
+        data.age = 0
+        data.tel = ''
+        getData()
+      })
+    }
     const getData = () => {
-      // 配列にした
-      let range = data.find.split(',')
-      let age_url = url + "&startAt=" + range[0]
-        + "&endAt=" + range[1]
-      axios.get(age_url).then((result) => {
-        data.message = 'get ID=' + data.find
-        if (result.data != null) {
-          data.fire_data = result.data
-        } else {
-          data.fire_data = 'no data found...'
-        }
+      let all_url = url + ".json"
+      axios.get(all_url).then((result) => {
+        data.message = 'get all data.'
+        data.fire_data = result.data
       }).catch((error) => {
         data.message = 'ERROR!'
         data.fire_data = {}
       })
     }
-    return { data, getData }
+    onMounted(() => {
+      getData()
+    })
+    return { data, addData, getData }
   },
 }
 </script>

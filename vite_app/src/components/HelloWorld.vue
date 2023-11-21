@@ -23,6 +23,18 @@
       <button @click="addData" class="btn btn-primary my-3">
         Click</button>
     </div>
+
+    <hr>
+    <h1>DeleteKey</h1>
+    <div class="text-left">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" v-model="data.delEmail" class="form-control">
+      </div>
+      <button @click="delData" class="btn btn-primary my-3">
+        Click</button>
+    </div>
+
     <ul v-for="(item, key) in data.fire_data" class="list-group">
       <li class="list-group-item text-left">
         <strong>{{ key }}</strong><br>{{ item }}
@@ -43,6 +55,7 @@ export default {
       title: 'Firebase',
       message: 'This is Firebase sample.',
       email: '',
+      delEmail:'',
       username: '',
       tel: '',
       age: '',
@@ -69,10 +82,23 @@ export default {
         getData()
       })
     }
+    const delData = ()=>{
+      if(data.delEmail == ''){
+        console.log('no-username!')
+        return
+      }
+      let del_url = url + '/' + data.delEmail + '.json'
+      axios.delete(del_url).then((re)=>{
+        data.message = data.delEmail + 'を削除しました。'
+        data.delEmail = ''
+        getData()
+      })
+    }
+    // データの取得
     const getData = () => {
       let all_url = url + ".json"
+      // 指定のURLでアクセスして取得
       axios.get(all_url).then((result) => {
-        data.message = 'get all data.'
         data.fire_data = result.data
       }).catch((error) => {
         data.message = 'ERROR!'
@@ -80,9 +106,10 @@ export default {
       })
     }
     onMounted(() => {
+      data.message = 'get all data.'
       getData()
     })
-    return { data, addData, getData }
+    return { data, addData,delData, getData }
   },
 }
 </script>
